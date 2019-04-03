@@ -127,7 +127,7 @@ export default {
   line-height: .6rem;
   font-weight: 400;
   padding-left: .25rem;
-  font-size: 12px;
+  font-size: .2rem;
 
 
 

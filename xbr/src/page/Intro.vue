@@ -64,13 +64,20 @@ export default {
 .introduction-text {
   padding: 0 0.4rem;
   text-indent: 2em;
-  font-size: 12px;
+  /* font-size: 24px; */
   line-height: 230%;
   color: #353535;
 }
+
+
 .intro-img{
   width: 100%;
   height: 5.37rem;
   padding: .3rem 0;
 }
+.intro-img img{
+    width: 100%;
+    height: 100%;
+    
+  }
 </style>

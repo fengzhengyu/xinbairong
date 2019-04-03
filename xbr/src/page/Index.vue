@@ -27,8 +27,8 @@
     </div>
     <div class="advantage-text">
       全球医疗健康用品交易城和河南国际医药健康城将形成一个全新的<br>
-“新经济+新零售+互联网+大医药+大健康+大养生+大食品+大资源+大数据+大平台+大服务+大交易”<br>
-的双核结合商业模式
+      新经济+新零售+互联网+大医药+大健康+大养生+大食品+大资源<br>+大数据+大平台+大服务
+      +大交易的双核结合商业模式
     </div>
     <Footer></Footer>
   </div>
@@ -58,6 +58,11 @@ export default {
   width: 100%;
   height: 5.29rem;
 }
+.banner img{
+    width: 100%;
+    height: 100%;
+    
+  }
 
 .title {
   padding: 0.4rem 0;
@@ -81,7 +86,7 @@ export default {
 .introduction-text {
   padding: 0 0.4rem;
   text-indent: 2em;
-  font-size: 12px;
+  /* font-size: .18rem; */
   line-height: 230%;
   color: #353535;
 }
@@ -93,9 +98,14 @@ export default {
   width: 100%;
   height: 3.55rem;
 }
+.advantage img{
+    width: 100%;
+    height: 100%;
+    
+  }
 .advantage-text{
   text-align: center;
-   font-size: 12px;
+   /* font-size: .18rem; */
   line-height: 230%;
   color: #353535;
   padding: .5rem 0 .5rem 0 ;

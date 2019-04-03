@@ -17,7 +17,7 @@ export default {
     height: .8rem;
     line-height: .8rem;
     text-align: center;
-    font-size: 10px;
+    font-size: .16rem;
     color: #fff;
     background: #0d2e16;
   }

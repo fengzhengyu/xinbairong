@@ -67,8 +67,13 @@ export default {
   height: 4.63rem;
   padding-bottom: .4rem;
 }
+.contact-img img{
+    width: 100%;
+    height: 100%;
+    
+  }
 .address{
-  font-size:12px;
+  /* font-size:12px; */
   color: #353535;
   padding-left: .85rem;
   line-height: 230%;

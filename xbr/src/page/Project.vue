@@ -183,7 +183,7 @@ export default {
 
 }
 .list p{
-  font-size: 12px;
+  /* font-size: .18rem; */
   color: #353535;
  
   line-height: 230%;

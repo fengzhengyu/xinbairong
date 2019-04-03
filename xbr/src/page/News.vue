@@ -6,14 +6,15 @@
       <h2>新闻动态</h2>
       <i>news</i>
     </div>
+   
     <ul class="news-wrap">
-      <li class="list">
+      <li class="list" v-for="(item,index) in  newsList" :key="index" @click="goDetail(item)">
         <div class="img">
           <img src="../common/img/news.jpg" alt="">
         </div>
         <div class="info">
-          <h2>吉林梅河口市同参堂参业有限公司到我司前来洽谈</h2>
-          <p>鑫百荣实业 <span>  2019-3-30 </span></p>
+          <h2>{{ item.title }}</h2>
+          <p>{{ item.typename }}<span>{{ item.addtime.substring(0,11) }}</span></p>
         </div>
       </li>
     </ul>
@@ -23,15 +24,41 @@
 </template>
 
 <script type="text/ecmascript-6">
-
+import { getNewsList } from 'common/api'
 import Banner from '@/components/common/Banner.vue'
 import Page from '@/components/common/Page.vue'
 
 export default {
   data() {
     return {
-      changeIndex: 0
+      newsList: [],
+     
     };
+  },
+  created() {
+    this.getList();
+  },
+  methods: {
+    getList(){
+      getNewsList({params:{
+        page:2
+        // num: 3
+       
+      }} ).then((response)=>{
+        let res = response.data;
+        
+        this.newsList = res.data
+        console.log(res)
+      })
+    },
+    goDetail(item){
+      this.$router.push({
+        name:'detail',
+        query: {
+          id: item.aid
+        }
+      })
+    }
   },
   components: {
     Banner 
@@ -61,6 +88,7 @@ export default {
   font-weight: 700;
   text-transform: uppercase;
 }
+
 .list{
   padding-bottom: .4rem;
   overflow: hidden;
@@ -85,7 +113,7 @@ export default {
    z-index: 0;
 }
 .info h2{
-  font-size: 14px;
+  font-size: .2rem;
   color : #353535;
   line-height: 150%;
   max-height: 1rem;
@@ -103,7 +131,7 @@ display:-webkit-box;
   position: absolute;
   left: 0;
   bottom: .1rem;
-  font-size: 10px;
+  font-size: .14rem;
   color: #898989;
 
 }
