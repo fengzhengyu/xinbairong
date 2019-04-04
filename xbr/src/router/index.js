@@ -31,7 +31,12 @@ export default new Router({
     {
       path: '/news',
       name: 'news',
-      component: News
+      component: News,
+      meta: {
+      
+        keepAlive: true ,
+        isUseCache: false
+      }
     },
     {
       path: '/detail',
@@ -60,7 +65,11 @@ export default new Router({
     
       return savedPosition
     } else {
-      return { x: 0, y: 0 }
+      if (from.meta.keepAlive) {  
+        from.meta.savedPosition = document.body.scrollTop;  
+       }  
+       return { x: 0, y: to.meta.savedPosition || 0 } 
+     
     }
   }
 })

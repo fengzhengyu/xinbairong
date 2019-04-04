@@ -10,7 +10,7 @@
     <ul class="news-wrap">
       <li class="list" v-for="(item,index) in  newsList" :key="index" @click="goDetail(item)">
         <div class="img">
-          <img src="../common/img/news.jpg" alt="">
+          <img :src="item.photo?item.photo: require('../common/img/news.jpg')" alt="">
         </div>
         <div class="info">
           <h2>{{ item.title }}</h2>
@@ -18,6 +18,12 @@
         </div>
       </li>
     </ul>
+    <div v-if="isLoad" class="load">
+      加载中...
+    </div>
+    <div v-if="!isLoad && newsList.length<=0" class="load">
+      暂无数据
+    </div>
 
     
   </div>
@@ -32,11 +38,25 @@ export default {
   data() {
     return {
       newsList: [],
+      isLoad: true
      
     };
   },
+  activated() {
+//  isUseCache为false时才重新刷新获取数据
+//  因为对list使用keep-alive来缓存组件，所以默认是会使用缓存数据的   
+ if(!this.$route.meta.isUseCache){   
+  this.newsList = []; // 清空原有数据
+  this.getList(); // 这是我们获取数据的函数
+  this.$route.meta.isUseCache = false;
+ } 
+ 
+//   console.log(this.$route.meta)
+// console.log('激活组件')
+},
   created() {
-    this.getList();
+   
+    //  this.getList()
   },
   methods: {
     getList(){
@@ -46,10 +66,14 @@ export default {
        
       }} ).then((response)=>{
         let res = response.data;
-        
-        this.newsList = res.data
         console.log(res)
-      })
+        if(res.flag == 'success' && res.data.length>0){
+         
+           this.newsList = res.data;
+           this.isLoad = false;
+        }
+        
+      }).catch((error)=>{console.log('接口或网络错误！')})
     },
     goDetail(item){
       this.$router.push({
@@ -64,7 +88,8 @@ export default {
     Banner 
   
  
-  }
+  },
+
 };
 </script>
 
@@ -113,7 +138,7 @@ export default {
    z-index: 0;
 }
 .info h2{
-  font-size: .2rem;
+  font-size: .24rem;
   color : #353535;
   line-height: 150%;
   max-height: 1rem;
@@ -131,7 +156,7 @@ display:-webkit-box;
   position: absolute;
   left: 0;
   bottom: .1rem;
-  font-size: .14rem;
+  font-size: .18rem;
   color: #898989;
 
 }
@@ -141,5 +166,10 @@ display:-webkit-box;
 .page{
 margin-left: 2rem;
 margin-bottom: .4rem;
+}
+.load{
+  text-align: center;
+  padding-top: 1rem;
+   color : #353535;
 }
 </style>

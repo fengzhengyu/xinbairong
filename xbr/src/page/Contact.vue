@@ -11,7 +11,7 @@
     <p class="address">
       地址：河南省南阳市镇平县沪陕高速与207国道交叉口中医药健康养生小镇
     </p>
-    <p class="address" style="padding-botom: .4rem;">电话：0377-6582888</p>
+    <p class="address" style="padding-bottom: .4rem;">电话：0377-6582888</p>
 
   
   </div>

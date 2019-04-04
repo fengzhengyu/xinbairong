@@ -6,9 +6,9 @@
                   transition
                   transition-mode="out-in"
                    v-if="$route.meta.keepAlive"
+                   
                   >
         </router-view>
-        <lg-preview></lg-preview>
     </keep-alive>
     <router-view class="view"
                   transition

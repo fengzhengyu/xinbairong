@@ -56,6 +56,9 @@ export default {
       this.isShow = false;
     },
     goLink(item){
+     if(this.$route.name == item.route ){
+     this.$router.go(0)
+      }
       this.$router.push({
         name: item.route
       });

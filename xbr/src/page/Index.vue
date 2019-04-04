@@ -26,8 +26,8 @@
       <img src="../common/img/advantage.png" alt>
     </div>
     <div class="advantage-text">
-      全球医疗健康用品交易城和河南国际医药健康城将形成一个全新的<br>
-      新经济+新零售+互联网+大医药+大健康+大养生+大食品+大资源<br>+大数据+大平台+大服务
+      全球医疗健康用品交易城和河南国际医药健康城将形成一个全新的
+      新经济+新零售+互联网+大医药+大健康+大养生+大食品+大资源+大数据+大平台+大服务
       +大交易的双核结合商业模式
     </div>
     <Footer></Footer>
@@ -104,8 +104,9 @@ export default {
     
   }
 .advantage-text{
-  text-align: center;
+  /* text-align: center; */
    /* font-size: .18rem; */
+   text-indent: 2em;
   line-height: 230%;
   color: #353535;
   padding: .5rem 0 .5rem 0 ;
