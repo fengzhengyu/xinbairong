@@ -46,7 +46,7 @@ export default {
        
       }} ).then((response)=>{
         let res = response.data;
-
+      // console.log(res)
         if(res.flag == 'success'){
           this.detail = res.data.content;
           this.addTime = res.data.addtime;
@@ -133,10 +133,7 @@ export default {
 
 
 }
-.detail p{
-  line-height: 200%;
-  font-size: .18rem;
-}
+
 .load{
   text-align: center;
   padding-top: 1rem;

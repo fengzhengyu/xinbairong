@@ -17,7 +17,13 @@
           <p>{{ item.typename }}<span>{{ item.addtime.substring(0,11) }}</span></p>
         </div>
       </li>
+     
     </ul>
+    <div class="page" v-if="newsList.length>0">
+      <span @click="goPage" v-if="!isEnd && !isLoad ">下一页</span>
+      <i v-if="isEnd && !isLoad">~到底了~</i>
+  
+    </div>
     <div v-if="isLoad" class="load">
       加载中...
     </div>
@@ -38,7 +44,10 @@ export default {
   data() {
     return {
       newsList: [],
-      isLoad: true
+      isLoad: true,
+      page: 1,
+      isEnd : false, // 分页到底了
+
      
     };
   },
@@ -50,27 +59,30 @@ export default {
   this.getList(); // 这是我们获取数据的函数
   this.$route.meta.isUseCache = false;
  } 
- 
-//   console.log(this.$route.meta)
-// console.log('激活组件')
 },
   created() {
-   
-    //  this.getList()
+
   },
   methods: {
     getList(){
       getNewsList({params:{
-        page:2
+        page:this.page,
         // num: 3
        
       }} ).then((response)=>{
         let res = response.data;
-        console.log(res)
-        if(res.flag == 'success' && res.data.length>0){
-         
-           this.newsList = res.data;
-           this.isLoad = false;
+        // console.log(res)
+        if(res.flag == 'success'){
+          if(res.data.length>0 &&res.listflag =="已到底部"){
+            this.newsList = res.data;
+             this.isEnd = true;
+            this.isLoad = false;
+          }else{
+            // 暂无数据
+            this.isLoad = false;
+            this.newsList = res.data;
+          }
+          
         }
         
       }).catch((error)=>{console.log('接口或网络错误！')})
@@ -82,7 +94,23 @@ export default {
           id: item.aid
         }
       })
+    },
+    goPage(){
+      if(!this.isLoad ){
+        this.page++;
+        getNewsList({params:{
+          page:this.page
+        }} ).then((response)=>{
+          let res = response.data;
+          this.newsList = this.newsList.concat(res.data)
+          if( res.listflag=="已到底部"){
+            this.isEnd = true;
+          }
+        })
+      }
+      
     }
+
   },
   components: {
     Banner 
@@ -164,8 +192,15 @@ display:-webkit-box;
   padding-left: .3rem;
 }
 .page{
-margin-left: 2rem;
-margin-bottom: .4rem;
+    text-align: center;
+    font-size: .16rem;
+    padding: .4rem 0;
+}
+.page span{
+  padding: .1rem .15rem;
+  background: #0d2e16;
+  color: #fff;
+  border-radius: .05rem;
 }
 .load{
   text-align: center;
